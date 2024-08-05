@@ -11,7 +11,7 @@ public class C04_PageClassiKullanma {
 
     WebDriver driver;
 
-    @Test
+    @Test(groups = {"smoke","E2E"})
     public void test01(){
 
         // testotomasyonu anasayfaya gidin

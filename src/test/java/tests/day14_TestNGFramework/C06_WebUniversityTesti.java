@@ -10,7 +10,7 @@ import utilities.ReusableMethods;
 
 public class C06_WebUniversityTesti {
 
-    @Test
+    @Test(groups = "regression")
     public void test01(){
 
         //1."http://webdriveruniversity.com/" adresine gidin

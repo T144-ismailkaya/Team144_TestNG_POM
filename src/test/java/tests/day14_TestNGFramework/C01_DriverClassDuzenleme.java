@@ -6,7 +6,7 @@ import utilities.Driver;
 
 public class C01_DriverClassDuzenleme {
 
-    @Test
+    @Test(groups = "smoke")
     public void test01(){
 
         Driver.getDriver().get("https://www.testotomasyonu.com");

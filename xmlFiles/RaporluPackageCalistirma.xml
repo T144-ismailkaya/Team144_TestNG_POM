@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Raporlu çalıştırma">
+    <test name="Rapor testi">
+        <packages>
+            <package name="tests.day16_HTMLReports_DataProvider"></package>
+        </packages>
+    </test>
+</suite>

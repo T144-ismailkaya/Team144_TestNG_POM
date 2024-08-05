@@ -24,14 +24,14 @@ public class ToFormPage {
     public WebElement sirtAgrisiYaziElementi;
 
     @FindBy(id = "gridCheck5")
-    public WebElement sirtAgrisiCheckbox;
+    public WebElement sirtAgrisiCheckboxElementi;
 
     @FindBy(id = "gridCheck4")
-    public WebElement carpintiCheckbox;
+    public WebElement carpintiCheckboxElementi;
 
     @FindBy(id = "hastalikCheck2")
-    public WebElement sekerCheckbox;
+    public WebElement sekerCheckboxElementi;
 
     @FindBy(id = "hastalikCheck7")
-    public WebElement epilepsiCheckbox;
+    public WebElement epilepsiCheckboxElementi;
 }

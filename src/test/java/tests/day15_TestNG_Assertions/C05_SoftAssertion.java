@@ -40,33 +40,58 @@ public class C05_SoftAssertion {
 
     @Test
     public void aramaTesti() {
-        // testotomasyonu sayfasına gidin
+
+        // Testotomasyonu anasayfaya gidin
         Driver.getDriver().get(ConfigReader.getProperty("toUrl"));
-        // URL testotomasyonu içerdiğini test edin
-        String expectedUrlIcerik = "testotomasyonuKKK";
+
+        // url'in "testotomasyonu" icerdigini test edin
+
+        String expectedUrlIcerik = "testotomasyonu";
         String actualUrl = Driver.getDriver().getCurrentUrl();
 
-        // SoftAssert kullanmak için 3 adıma ihtiyac var
+        // SoftAssert kullanmak icin 3 adima ihtiyac var
+        // 1.adim softAssert objesi olusturmak
 
-        // 1.adim softAssert objesi oluşturmak
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(actualUrl.contains(expectedUrlIcerik),"URL testotomasyonu içermiyor!");
 
-        // belirlenmiş arama kelimesini yapın
+        // 2. yapilacak tum asertion'lari softAssert objesi ile yapmak
+
+        softAssert.assertTrue(actualUrl.contains(expectedUrlIcerik),"url testotomasyonu icermiyor");
+
+        // belirlenmis arama kelimesi icin arama yapin
         TestOtomasyonuPage testOtomasyonuPage = new TestOtomasyonuPage();
-        testOtomasyonuPage.aramaKutusu.sendKeys(ConfigReader.getProperty("toAranacakKelime") + Keys.ENTER);
-        // bulunan urun sayısının 3'ten fazla olduğunu test edin
-        int minimmumUrunSayisi = 30;
-        int actualBulunanUrunSayisi  = testOtomasyonuPage.bulunanUrunElementleriList.size();
-        softAssert.assertTrue(actualBulunanUrunSayisi>minimmumUrunSayisi);
-        testOtomasyonuPage.bulunanUrunElementleriList.get(0).click();
 
-        String actualUrunIsmi = testOtomasyonuPage.ilkUrunSayfasiIsimElementi.getText().toLowerCase();
-        softAssert.assertTrue(actualUrunIsmi.contains(ConfigReader.getProperty("toAranacakKelime")));
+        testOtomasyonuPage.aramaKutusu
+                .sendKeys(ConfigReader.getProperty("toAranacakKelime") + Keys.ENTER);
 
-        // 3.adım softAssert objesine yaptığı asserton'ları raporlamasını söyleyelim
+        // bulunan urun sayisinin 3'den fazla oldugunu test edin
 
+        int expectedMinUrunSayisi = 3;
+        int actualBulunanUrunSayisi = testOtomasyonuPage.bulunanUrunElementleriList
+                .size();
+
+        softAssert.assertTrue(actualBulunanUrunSayisi > expectedMinUrunSayisi,"bulunan urun sayisi beklenen minumum sayidan fazla degil");
+
+
+        //ilk urunu tiklayin
+        testOtomasyonuPage.bulunanUrunElementleriList
+                .get(0)
+                .click();
+
+        // acilan sayfada urun isminde case sensitive olmadan
+        // aranacak kelimenin bulundugunu test edin
+
+        String actualUrunIsmi = testOtomasyonuPage.ilkUrunSayfasiIsimElementi
+                .getText()
+                .toLowerCase();
+        String expectedisimIcerik = ConfigReader.getProperty("toAranacakKelime");
+
+        softAssert.assertTrue(actualUrunIsmi.contains(expectedisimIcerik),"urun isminde aranacak kelime yok");
+
+        // 3.adim softAssert objesine yaptigi assertion'lari RAPORLAMASINI soyleyelim
         softAssert.assertAll();
+
+        Driver.quitDriver();
 
     }
 }
